@@ -1,19 +1,64 @@
-# Getting Started
+## General info:
 
-### Reference Documentation
-For further reference, please consider the following sections:
+This is currently deployed in the cloud for easy access:
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.6.4/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.6.4/maven-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.6.4/reference/htmlsingle/#boot-features-developing-web-applications)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.6.4/reference/htmlsingle/#boot-features-jpa-and-spring-data)
+https://zinkworks-atm.herokuapp.com/
 
-### Guides
-The following guides illustrate how to use some features concretely:
+Note: if this link is not accessed for a few hours, it may take a while for it to load back up since Heroku
+puts inactive servers to sleep.
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
+This is an API system that has a front-end built with vanilla javascript (axios) and HTML/CSS.
+It features Swagger API documentation and H2 in-memory database. It is secured with Spring Security,
+which allows for separate accounts to be accessed.
 
+It has 99% coverage in unit testing using Junit/Mockito, and exception handling for the most common errors.
+
+Note: ATM bills are shared amongst all users, and can be depleted.
+
+Test login/password:
+
+123456789 \
+1234
+
+987654321 \
+4321
+
+## Technologies used:
+
+* Spring Boot
+* Spring Security
+* Spring Data JPA
+* H2
+* Vanilla javascript
+* Bootstrap
+* Docker
+* Junit
+* Mockito
+
+## Additional information:
+
+For database access: \
+/h2-console
+* Url 'jdbc:h2:mem:testdb'
+* username 'sa'
+* no password
+
+If needed, refer to data.sql and schema.sql for queries to reset data on DB
+
+For Swagger API documentation: 
+
+/swagger-ui.html
+
+Note: To make a request with Postman, you first need to send a POST request to /login with
+form-data populated using parameters 'username' (accountNumber) and 'password' (PIN), which will create a cookie
+
+## Running with Docker:
+
+mvn clean install \
+docker build -t zinkworks-atm . \
+docker run -d -p 8080:8080 zinkworks-atm \
+http://localhost:8080
+
+## Running locally:
+
+Open in your favorite IDE, import dependencies with Maven, build, and run
