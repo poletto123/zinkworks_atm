@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ATM Welcome screen</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" align="center">
+    <a class="navbar-brand" href="#">Zinkworks ATM</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="#" onclick="logout()">Log out</a>
+        </div>
+    </div>
+</nav>
+<table id="account" class="table">
+    <thead>
+    <tr>
+        <th scope="col">Account Number</th>
+        <th scope="col">Balance</th>
+        <th scope="col">Overdraft Limit</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td id="account-number"></td>
+        <td id="account-balance"></td>
+        <td id="account-overdraft"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div id ="overdraft-checkbox">
+    <input id="overdraft" type="checkbox" name="overdraft" value="true">
+    <label for="overdraft">Use overdraft for new withdraw requests</label>
+</div>
+
+<div id="withdraw-form">
+    <label for="amount">Amount</label>
+    <input type="number" id="amount" name="amount" onkeypress="checkIfKeyEnterWithdraw(event)">
+    <button type="button" class="btn btn-primary" onclick="withdraw()">Withdraw</button>
+</div>
+
+<div id="error-message-div">
+    <div id="error-message"></div>
+</div>
+
+
+<table id="bills-to-dispense" class="bg-light table">
+    <caption align=top>Bills dispensed on last withdraw</caption>
+    <thead>
+    <tr>
+        <th scope="col">50</th>
+        <th scope="col">20</th>
+        <th scope="col">10</th>
+        <th scope="col">5</th>
+        <th scope="col">Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td id="fifty-to-dispense">0</td>
+        <td id="twenty-to-dispense">0</td>
+        <td id="ten-to-dispense">0</td>
+        <td id="five-to-dispense">0</td>
+        <td id="total-bills-dispense">0</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+
+<footer class="text-center text-lg-start">
+    <div class="text-center">
+        <table id="available-bills" class="table bg-light">
+            <caption align=top>Debug Panel - Available bills in ATM</caption>
+            <thead>
+            <tr>
+                <th scope="col">50</th>
+                <th scope="col">20</th>
+                <th scope="col">10</th>
+                <th scope="col">5</th>
+                <th scope="col">Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td id="fifty-total-atm"></td>
+                <td id="twenty-total-atm"></td>
+                <td id="ten-total-atm"></td>
+                <td id="five-total-atm"></td>
+                <td id="total-bills-atm"></td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="#" onclick="h2console()">H2 Console</a>
+        <p>Url 'jdbc:h2:mem:testdb', username 'sa', no password. If needed, refer to data.sql and schema.sql for queries to reset data on DB</p>
+        <a href="#" onclick="swagger()">Swagger API Documentation</a>
+        <p>To make a request with Postman, you first need to send a POST request to /login with form-data populated
+            using parameters 'username' (accountNumber) and 'password' (PIN), which will create a cookie</p>
+        </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="index.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</footer>
+</html>
